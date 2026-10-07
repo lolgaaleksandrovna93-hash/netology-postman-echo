@@ -1,21 +1,36 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches: [main] # Вы можете указать свою ветку или оставить просто "push"
+  pull_request:
 
 jobs:
   build:
-    runs-on: windows-latest # <-- Теперь сборка будет запускаться на Windows!
+    runs-on: windows-latest # Используем Windows-машину
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository 📁
+        uses: actions/checkout@v4
 
-      # Установка JDK 17 для Windows
-      - name: Set up JDK 17
-        uses: actions/setup-java@v5 # ОБНОВЛЕНО! v4 устарела.
+      # Обновлённое действие установки JDK до актуальной версии v5
+      - name: Set up JDK 17 ☕️
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: "17"
 
-      # Запускаем тесты через Gradle Wrapper для Windows
-      # ВАЖНО: используйте /gradlew.bat вместо ./gradlew
-      - run: /gradlew.bat test --no-daemon
+      # ✅ Правильная команда запуска тестов для PowerShell
+      # Обратите внимание: нет символа "/" перед gradlew.bat!
+      - name: Run tests 🚀
+        run: |
+          # Этот блок выводит информацию о системе, чтобы помочь с отладкой
+          Write-Host "Java version:"
+          java --version
+          Write-Host ""
+          Write-Host "Gradle wrapper location:"
+          Get-ChildItem .\gradlew*
+          Write-Host ""
+
+          # Запускаем тесты без демона
+          ./gradlew.bat test --no-daemon
