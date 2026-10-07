@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.netology.postmanecho'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17' // Или любая другая версия JDK
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+}
+
+test {
+    useJUnitPlatform()
+}
