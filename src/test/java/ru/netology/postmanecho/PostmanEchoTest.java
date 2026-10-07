@@ -19,7 +19,7 @@ public class PostmanEchoTest {
                 .when()
                 .post("/post") // Метод POST
                 .then()
-                .statusCode(201)
+                .statusCode(200)
                 /* Проверка JSONPath-выражением */
                 .body("data", equalTo(bodyData));
     }
